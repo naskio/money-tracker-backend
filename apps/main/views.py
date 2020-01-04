@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from .models import Tag, Transaction
 from .filters import TransactionFilter
-from .serializers import UserSerializer, TagSerializer, TransactionSerializer
+from .serializers import UserSerializer, TagSerializer, TransactionSerializer, TransactionEditSerializer
 from rest_framework.generics import CreateAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -48,7 +48,7 @@ class CurrentUserView(APIView):
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects
-    serializer_class = TagSerializer(many=True)
+    serializer_class = TagSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_permissions(self):
@@ -68,3 +68,9 @@ class TransactionViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Transaction.objects.filter(user=self.request.user)
+
+    def get_serializer_class(self):
+        if self.action == 'list' or self.action == 'retrieve':
+            return TransactionSerializer
+        else:
+            return TransactionEditSerializer

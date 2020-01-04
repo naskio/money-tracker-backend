@@ -29,13 +29,18 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class TransactionSerializer(serializers.ModelSerializer):
-    tags = TagSerializer(many=True)
-    user = UserSerializer()
+    tags = TagSerializer(many=True, read_only=True)
+    user = UserSerializer(read_only=True)
 
+    class Meta:
+        model = Transaction
+        fields = '__all__'
+
+
+class TransactionEditSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = '__all__'
         extra_kwargs = {'user': {
             'default': serializers.CurrentUserDefault(),
-            # 'read_only': True,
         }}
