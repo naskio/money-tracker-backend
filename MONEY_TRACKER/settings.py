@@ -112,10 +112,21 @@ USE_L10N = False
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
+# for the command collectstatic (there will be collected here in PRODUCTION)
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
+# other folders to lock for statics in addition to any $APP/static
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+# from where we serve static files (route)
 STATIC_URL = '/static/'
+
+# from where we serve media files
+MEDIA_URL = '/media/'
+
+# folder where we store media files
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
