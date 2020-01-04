@@ -14,11 +14,11 @@ class Tag(models.Model):
 
 
 class Transaction(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     type = TransactionTypeField()
     amount = models.FloatField()
     date = models.DateTimeField(auto_now_add=True)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True, related_name='tags')
 
     def __str__(self):
         return f"{self.user.username} {self.id}"
