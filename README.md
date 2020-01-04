@@ -1,5 +1,5 @@
 # money-tracker-backend
-Training Camp, backend, Django, 2020
+Training Camp by ETIC at ESI (Algiers), backend, Django, 2020
 # step-by-step guide
 - install python 3.6+
 - install virtualenv
