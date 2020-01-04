@@ -9,7 +9,7 @@ router.register(r'transactions', views.TransactionViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('', views.HelloView.as_view(), name='hello'),
+    path('hi/', views.HelloView.as_view(), name='hello'),
     path('login/', TokenObtainPairView.as_view(), name='login'),
     # path('login/', views.LoginView.as_view(), name='login'),
     path('register/', views.UserRegistrationView.as_view(), name='register'),
