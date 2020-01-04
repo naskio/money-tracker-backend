@@ -1,3 +1,27 @@
 from django.db import models
+from django.contrib.auth.models import User
+from .fields import TransactionTypeField
 
-# Create your models here.
+
+class Tag(models.Model):
+    name = models.CharField(max_length=80, unique=True)
+
+    class Meta:
+        verbose_name_plural = "Tags"
+
+    def __str__(self):
+        return self.name
+
+
+class Transaction(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    type = TransactionTypeField()
+    amount = models.FloatField()
+    date = models.DateTimeField(auto_now_add=True)
+    tags = models.ManyToManyField(Tag)
+
+    def __str__(self):
+        return f"{self.user.username} {self.id}"
+
+    class Meta:
+        verbose_name_plural = 'Transactions'
