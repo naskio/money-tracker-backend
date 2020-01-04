@@ -1,0 +1,1 @@
+web: gunicorn MONEY_TRACKER.wsgi
